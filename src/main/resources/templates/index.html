@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Student CRUD With Kotlin</title>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="row">
+
+                <form th:object="${student}" th:action="@{/save}" method="post">
+                    <div class="form-group">
+                        <label for="name">Student Name</label>
+                        <input type="text" th:field="*{name}" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter email">
+                        <small id="nameHelp" th:if="${#fields.hasErrors('name') }"  th:errors="*{name}" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="roll">Roll Number </label>
+                        <input type="text" th:field="*{roll}" class="form-control" id="roll" aria-describedby="rollHelp" placeholder="Enter Roll Number">
+                        <small id="rollHelp" th:if="${#fields.hasErrors('roll') }"  th:errors="*{roll}" class="form-text text-danger"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Email address</label>
+                        <input type="text" th:field="*{address}" class="form-control" id="address" aria-describedby="addressHelp" placeholder="Enter address">
+                        <small id="addressHelp" th:if="${#fields.hasErrors('address') }"  th:errors="*{address}" class="form-text text-danger"></small>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="enable"  id="enable" th:checked="*{enable}" aria-describedby="enableHelp">
+                        <label class="form-check-label" for="enable" >Enable</label>
+                        <small id="enablehelp" th:if="${#fields.hasErrors('enable') }"  th:errors="*{enable}" class="form-text text-danger"></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- List of Students -->
+<div class="container text-center">
+
+
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Roll Number</th>
+            <th scope="col">Address</th>
+            <th scope="col">Enable</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <tr th:each="student,itr : ${students}">
+            <th:block th:if="${#lists.isEmpty(students)}">
+                <td colspan="6">No records Available</td>
+            </th:block>
+            <th:block th:unless="${#lists.isEmpty(students)}">
+                <th scope="row">[[${student.id}]]</th>
+                <td th:text="${student.name}">Name</td>
+                <td th:text="${student.roll}">Roll Number</td>
+                <td th:text="${student.address}">Address</td>
+                <td th:switch="${student.enable}">
+
+                    <th:block th:case="true">
+                        <span class="text-success">Active</span>
+                    </th:block>
+                    <th:block th:case="false">
+                        <span class="text-danger" >Deactivated</span>
+                    </th:block>
+
+                </td>
+            </th:block>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+></script>
+</body>
+</html>

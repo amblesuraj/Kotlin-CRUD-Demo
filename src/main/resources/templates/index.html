@@ -6,51 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
     <title>Student CRUD With Kotlin</title>
 </head>
 <body>
 
 
-    <div class="container">
-        <div class="row text-center">
-            <div class="row">
-
-                <form th:object="${student}" th:action="@{/save}" method="post">
-                    <div class="form-group">
-                        <label for="name">Student Name</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter email">
-                        <small id="nameHelp" th:if="${#fields.hasErrors('name') }"  th:errors="*{name}" class="form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="roll">Roll Number </label>
-                        <input type="text" th:field="*{roll}" class="form-control" id="roll" aria-describedby="rollHelp" placeholder="Enter Roll Number">
-                        <small id="rollHelp" th:if="${#fields.hasErrors('roll') }"  th:errors="*{roll}" class="form-text text-danger"></small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Email address</label>
-                        <input type="text" th:field="*{address}" class="form-control" id="address" aria-describedby="addressHelp" placeholder="Enter address">
-                        <small id="addressHelp" th:if="${#fields.hasErrors('address') }"  th:errors="*{address}" class="form-text text-danger"></small>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="enable"  id="enable" th:checked="*{enable}" aria-describedby="enableHelp">
-                        <label class="form-check-label" for="enable" >Enable</label>
-                        <small id="enablehelp" th:if="${#fields.hasErrors('enable') }"  th:errors="*{enable}" class="form-text text-danger"></small>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- List of Students -->
-<div class="container text-center">
+<div class="container ">
 
-
-
+    <div class="d-flex justify-content-around">
+        <div class="p-2 "><a href="/addStudent" class="badge badge-primary">Add New Student</a></div>
+        <div class="p-2 "><strong>Student List</strong></div>
+        <div class="p-2"><span class=" badge badge-primary" th:if="${not #lists.isEmpty(students)}"> Number Of Students : [[${#lists.size(students)}]]</span></div>
+    </div>
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -59,6 +30,8 @@
             <th scope="col">Roll Number</th>
             <th scope="col">Address</th>
             <th scope="col">Enable</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -83,6 +56,8 @@
                     </th:block>
 
                 </td>
+                <td><a th:href="@{/update/{id}(id=${student.id})}" class=" badge badge-primary">Edit</a></td>
+                <td><a th:href="@{/delete/{id}(id=${student.id})}" class=" badge badge-danger">Delete</a></td>
             </th:block>
         </tr>
 
@@ -90,11 +65,11 @@
     </table>
 
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-></script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>

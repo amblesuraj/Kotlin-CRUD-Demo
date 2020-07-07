@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <title>Student CRUD With Kotlin</title>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row mt-2 mb-2">
+
+        <div class="offset-lg-2 col-lg-8">
+
+            <div class="card ">
+                <div class="card-header bg-primary d-flex justify-content-between">
+
+                    <div th:if="${student == null}">
+                        <span class="text-light">Add new Student</span>
+                    </div>
+                    <div th:unless="${student == null}">
+                        <span class="text-light">Update Student info</span>
+                    </div>
+                    <div><span class="text-light" ><a href="/"  class="badge badge-warning">Show Student List</a></span></div>
+                </div>
+                <div class="card-body">
+                    <div th:if="${not #strings.isEmpty(msg)}">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success</strong> [[${msg}]]
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div th:if="${not #strings.isEmpty(error)}">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Success</strong> [[${error}]]
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <form th:object="${student}" th:action="@{/save}" method="post">
+                        <div class="form-group">
+                            <label for="name">Student Name</label>
+                            <input type="text" th:field="*{name}" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter email">
+                            <small id="nameHelp" th:if="${#fields.hasErrors('name') }"  th:errors="*{name}" class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="roll">Roll Number </label>
+                            <input type="text" th:field="*{roll}" class="form-control" id="roll" aria-describedby="rollHelp" placeholder="Enter Roll Number">
+                            <small id="rollHelp" th:if="${#fields.hasErrors('roll') }"  th:errors="*{roll}" class="form-text text-danger"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Email address</label>
+                            <input type="text" th:field="*{address}" class="form-control" id="address" aria-describedby="addressHelp" placeholder="Enter address">
+                            <small id="addressHelp" th:if="${#fields.hasErrors('address') }"  th:errors="*{address}" class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="enable"  id="enable" th:checked="*{enable}" aria-describedby="enableHelp">
+                            <label class="form-check-label" for="enable" >Enable</label>
+                            <small id="enablehelp" th:if="${#fields.hasErrors('enable') }"  th:errors="*{enable}" class="form-text text-danger"></small>
+                        </div>
+                    <input type="hidden" name="id" th:value="${id}">
+                        <div class="form-group mt-1">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

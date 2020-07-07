@@ -6,6 +6,7 @@ import com.ngu.Service.StudentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 @Transactional
@@ -26,6 +27,10 @@ class StudentServiceImpl : StudentService {
 
     override fun findById(id : Int): Student {
         return studentRepository.getOne(id)
+    }
+
+    override fun findByStudentId(id: Int): Optional<Student> {
+        return studentRepository.findById(id)
     }
 
 

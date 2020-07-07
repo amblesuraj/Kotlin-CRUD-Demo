@@ -42,10 +42,10 @@ class StudentRestController {
     @GetMapping("/all")
     fun allStudents() : List<Student> = studentService.findAllStudents()
 
-    @GetMapping("/student/{id}")
+    @GetMapping("/get/{id}")
     fun allStudents(@PathVariable id : Int) : Student = studentService.findById(id)
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     fun deleteStudent(@PathVariable id : Int) : String {
 
         studentService.deleteById(id)

@@ -1,0 +1,36 @@
+GET http://localhost:9090/api/student/all
+
+###
+
+POST http://localhost:9090/api/student/addStudent
+Content-Type: application/json
+
+{
+    "name": "Dean Ambrose",
+    "roll": 110,
+    "address": "West Florida",
+    "enable": false
+}
+
+###
+
+GET http://localhost:9090/api/student/get/1
+
+###
+
+DELETE http://localhost:9090/api/student/delete/1
+
+###
+
+PUT http://localhost:9090/api/student/update
+Content-Type: application/json
+
+{
+   "id" : 2,
+  "name": "The Dead Man",
+  "roll": 120,
+  "address": "Morgue",
+  "enable": true
+}
+
+###

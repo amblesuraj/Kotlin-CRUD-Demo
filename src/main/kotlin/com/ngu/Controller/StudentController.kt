@@ -20,7 +20,6 @@ class StudentController {
     @GetMapping(value = ["","/","index"])
     fun index(model: Model) :String {
         model.addAttribute("student",Student())
-        model.addAttribute("enable",true)
         model.addAttribute("students",stduentService.findAllStudents())
         return "index"
     }

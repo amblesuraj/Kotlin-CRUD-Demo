@@ -21,10 +21,10 @@
             <div class="card ">
                 <div class="card-header bg-primary d-flex justify-content-between">
 
-                    <div th:if="${student == null}">
+                    <div th:if="${#strings.isEmpty(student.id) && student.id == null}">
                         <span class="text-light">Add new Student</span>
                     </div>
-                    <div th:unless="${student == null}">
+                    <div th:unless="${#strings.isEmpty(student.id) && student.id== null}">
                         <span class="text-light">Update Student info</span>
                     </div>
                     <div><span class="text-light" ><a href="/"  class="badge badge-warning">Show Student List</a></span></div>

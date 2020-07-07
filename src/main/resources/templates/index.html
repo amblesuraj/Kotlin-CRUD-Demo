@@ -17,10 +17,10 @@
     <!-- List of Students -->
 <div class="container ">
 
-    <div class="d-flex justify-content-around">
-        <div class="p-2 "><a href="/addStudent" class="badge badge-primary">Add New Student</a></div>
+    <div class="d-flex justify-content-around text-center">
+        <div class="p-2 " th:if="${not #lists.isEmpty(students)}"><a href="/addStudent" class="badge badge-primary">Add New Student</a></div>
         <div class="p-2 "><strong>Student List</strong></div>
-        <div class="p-2"><span class=" badge badge-primary" th:if="${not #lists.isEmpty(students)}"> Number Of Students : [[${#lists.size(students)}]]</span></div>
+        <div class="p-2" th:if="${not #lists.isEmpty(students)}"><span class=" badge badge-primary" > Number Of Students : [[${#lists.size(students)}]]</span></div>
     </div>
     <table class="table">
         <thead class="thead-dark">
@@ -36,12 +36,10 @@
         </thead>
         <tbody>
 
-
+        <th:block th:if="${not #lists.isEmpty(students) && students != null}">
         <tr th:each="student,itr : ${students}">
-            <th:block th:if="${#lists.isEmpty(students)}">
-                <td colspan="6">No records Available</td>
-            </th:block>
-            <th:block th:unless="${#lists.isEmpty(students)}">
+
+
                 <th scope="row">[[${student.id}]]</th>
                 <td th:text="${student.name}">Name</td>
                 <td th:text="${student.roll}">Roll Number</td>
@@ -58,9 +56,18 @@
                 </td>
                 <td><a th:href="@{/update/{id}(id=${student.id})}" class=" badge badge-primary">Edit</a></td>
                 <td><a th:href="@{/delete/{id}(id=${student.id})}" class=" badge badge-danger">Delete</a></td>
-            </th:block>
-        </tr>
 
+
+        </tr>
+        </th:block>
+        <th:block th:unless="${not #lists.isEmpty(students) && students != null}">
+          <tr class="text-center">
+            <td colspan="7" class="bg-light">
+                <strong class="text-danger">No records Available</strong>
+                <div class="p-2 "><a href="/addStudent" class="badge badge-primary">Add New Student</a></div>
+            </td>
+          </tr>
+        </th:block>
         </tbody>
     </table>
 

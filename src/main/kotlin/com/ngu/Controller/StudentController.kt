@@ -52,7 +52,7 @@ class StudentController {
 
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     fun deleteStudent(@PathVariable id : Int , model: Model) : String
     {
 
